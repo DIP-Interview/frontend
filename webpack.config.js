@@ -6,13 +6,13 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',  
+  entry: './src/index.tsx',  
   output: {
     path: path.resolve(__dirname, './dist'), // 결과물 경로
     filename: 'bundle.js', // 결과물 파일명
   },
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   devtool: 'eval-cheap-source-map',
   devServer: {
@@ -23,20 +23,13 @@ module.exports = {
       overlay: true,
     },
     port: 5500,
-    hot: true,
-
   },
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
-        exclude: '/node_modules/',
-        loader: 'babel-loader',
-      },
-      {
-        test: /\.css$/,
-        // use: ['style-loader', 'css-loader'],
-        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/,
       },
       {
         test: /\.(jpeg|jpg)$/,
@@ -52,6 +45,5 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
-    new MiniCssExtractPlugin({ filename: 'app.css' }),
   ],
 };
