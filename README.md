@@ -8,6 +8,8 @@
 
 **Machine Learning Library** : Tensorflow.js / Google Teachable-Machine
 
+**Test Code** : Jest
+
 <br>
 
 ### 협업을 위한 커밋 컨벤션😎
