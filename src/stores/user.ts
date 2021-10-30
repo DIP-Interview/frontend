@@ -1,27 +1,31 @@
 // [ username을 저장하는 store ]
 
-import { observable } from "mobx";
+import { makeObservable, action, observable } from "mobx";
 
-export interface UserData {
+export interface Score {
   id: number;
+  words: string[];
+  score: number;
+}
+
+interface UserData {
   username: string;
+  scores: Score[];
+  addScores: (content: Score) => void;
 }
 
-interface User {
-  userData: UserData[];
-  currentId: number;
-  addUsername: (content: string) => void;
+export default class UserDataStore implements UserData {
+  @observable
+  username = "";
+
+  scores: Score[] = [];
+
+  @action
+  addScores = (content: Score) => {
+    this.scores.push({
+      id: content.id,
+      words: content.words,
+      score: content.score,
+    });
+  };
 }
-
-// user 라는 객체를 선언 한 뒤 observable로 감싸서 store를 생성한다.
-// observable이 상태가 변화는지 관찰해 주기 때문에 불변성을 지켜줄 필요가 없다.
-// 액션들은 스토어 안쪽에 같이 작성할 수 있다.
-export const user = observable<User>({
-  userData: [],
-  currentId: 0,
-
-  addUsername(content) {
-    this.userData.push({ id: this.currentId, username: content });
-    this.currentId++;
-  },
-});
