@@ -1,5 +1,9 @@
-import { user } from "./user";
+import UserDataStore from "./userDataStore";
 
-const store = { user };
+export default class RootStore {
+  userDataStore: UserDataStore;
 
-export default store;
+  constructor() {
+    this.userDataStore = new UserDataStore();
+  }
+}

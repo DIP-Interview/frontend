@@ -1,19 +1,28 @@
+import { observer } from "mobx-react";
 import React, { useState } from "react";
 
-import useStore from "../useStore";
+import { useStores } from "../Context";
 
-const WelcomePage = () => {
-  const { user } = useStore();
+const WelcomePage = observer(() => {
+  const { userDataStore } = useStores();
+
   const [username, setUsername] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    user.addUsername(username);
-    console.log(user.userData);
+    if (username) {
+      userDataStore.addUsername(username);
+    } else {
+      setErrorMessage("닉네임을 입력해주세요~");
+    }
   };
 
   const onChangeContent = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
+    // if (!e.target.value) {
+    //   setUsername("");
+    // }
   };
 
   return (
@@ -31,9 +40,10 @@ const WelcomePage = () => {
           placeholder="닉네임"
         />
         <button type="submit">시작하기</button>
+        {errorMessage}
       </form>
     </div>
   );
-};
+});
 
 export default WelcomePage;
