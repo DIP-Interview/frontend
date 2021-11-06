@@ -12,6 +12,7 @@ const MainPage = observer(() => {
   const stores = useStores();
   const [welcomeModalVisible, setWelcomeModalVisible] = useState(true);
   const [number, setNumber] = useState(1);
+  
   return (
     <>
       <WelcomeModal

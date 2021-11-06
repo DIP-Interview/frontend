@@ -76,6 +76,7 @@ const WelcomeModal = ({ visible, setVisible }: WelcomeModalProps) => {
       <FormContainer onSubmit={onSubmit}>
         <InputUsername
           type="text"
+          aria-label="nickname"
           onChange={onChangeContent}
           value={username}
           placeholder="닉네임"
