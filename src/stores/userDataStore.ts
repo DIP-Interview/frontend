@@ -1,6 +1,6 @@
 // [ username을 저장하는 store ]
 
-import { makeObservable, action, observable } from "mobx";
+import { action, observable } from "mobx";
 
 export interface Score {
   id: number;
@@ -11,7 +11,8 @@ export interface Score {
 interface UserData {
   username: string;
   scores: Score[];
-  addScores: (content: Score) => void;
+  addUsername: (name: string) => void;
+  addScores: (contents: Score) => void;
 }
 
 export default class UserDataStore implements UserData {
@@ -21,11 +22,15 @@ export default class UserDataStore implements UserData {
   scores: Score[] = [];
 
   @action
-  addScores = (content: Score) => {
+  addUsername = (name: string) => {
+    this.username = name;
+  };
+
+  addScores = (contents: Score) => {
     this.scores.push({
-      id: content.id,
-      words: content.words,
-      score: content.score,
+      id: contents.id,
+      words: contents.words,
+      score: contents.score,
     });
   };
 }

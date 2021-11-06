@@ -1,12 +1,8 @@
 import React from "react";
-import WelcomePage from "./pages/WelcomePage";
+import MainPage from "./pages/MainPage";
 
 const App: React.FC = () => {
-  return (
-    <div className="container">
-      <WelcomePage />
-    </div>
-  );
+  return <MainPage />;
 };
 
 export default App;
