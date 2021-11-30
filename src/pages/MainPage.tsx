@@ -8,10 +8,11 @@ const Layout = styled.div``;
 
 const Container = styled.div``;
 
-const MainPage = observer(() => {
+const MainPage: React.FC = observer(() => {
   const stores = useStores();
-  const [welcomeModalVisible, setWelcomeModalVisible] = useState(true);
-  const [number, setNumber] = useState(1);
+  const [welcomeModalVisible, setWelcomeModalVisible] = useState<boolean>(true);
+  const [number, setNumber] = useState<number>(1);
+
   return (
     <>
       <WelcomeModal

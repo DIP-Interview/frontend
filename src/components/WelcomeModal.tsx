@@ -1,5 +1,5 @@
 import { observer } from "mobx-react";
-import React, { useState } from "react";
+import React, { useState, FormEvent, ChangeEvent } from "react";
 import styled from "styled-components";
 
 import { useStores } from "../Context";
@@ -40,18 +40,18 @@ const Button = styled.button`
   width: 100px;
 `;
 
-type WelcomeModalProps = {
+interface WelcomeModalProps {
   visible: boolean;
   setVisible: (value: boolean) => void;
-};
+}
 
-const WelcomeModal = ({ visible, setVisible }: WelcomeModalProps) => {
+const WelcomeModal: React.FC<WelcomeModalProps> = ({ visible, setVisible }) => {
   const { userDataStore } = useStores();
 
-  const [username, setUsername] = useState("");
-  const [errorMessage, setErrorMessage] = useState("");
+  const [username, setUsername] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = (e: FormEvent): void => {
     e.preventDefault();
     if (username) {
       userDataStore.addUsername(username);
@@ -61,7 +61,7 @@ const WelcomeModal = ({ visible, setVisible }: WelcomeModalProps) => {
     }
   };
 
-  const onChangeContent = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeContent = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value);
   };
 
